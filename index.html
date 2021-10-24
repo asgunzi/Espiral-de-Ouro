@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+
+
+ <title>A Espiral de Ouro</title>
+ 
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<style>
+table, th, td {
+  border: 0px solid black;
+}
+</style>
+
+</head>
+<body>
+
+      <h1><a href="https://ideiasesquecidas.com"> <img src=	"https://ideiasesquecidas.files.wordpress.com/2020/03/forgottenlogo.png" width="90" height = "50"></a> A Espiral de Ouro - Espiral feita com Golden Ratio</h1>
+
+<table>
+  <tr>
+    <th>Veloc. Angular: </th>
+    <th>
+		<div class="slidecontainer" onchange= "Desenhar()">
+			<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+		</div>
+
+	</th>
+	<th id ="valor_rad">
+		3.88 radianos
+	</th>
+	
+  </tr>
+</table>
+
+
+
+<script type = "text/javascript">
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", 800)
+        .attr("height", 800);
+
+	Desenhar();
+	
+	function Desenhar()
+	{
+	
+	var x0 =[];
+	var y0 =[];
+	var r0 =[];
+	var tamanho = 400;
+	var i;
+	var ratio  = 137.5;
+	var slider_angulo;
+	var new_ratio;
+	var speed = 1;
+	var theta=0;
+	var r=0;
+
+	slider_angulo =d3.select("#myRange").property("value");
+	
+	new_ratio =ratio + 2*(slider_angulo-50)/100; //Dois graus para cima ou para baixo
+	
+	//Muda texto no painel
+	d3.select("#valor_rad").text(new_ratio + " radianos")
+
+	svg.selectAll("*").remove();
+
+
+
+	//Ponto inicial
+	x0.push(400);
+	y0.push(400);
+	r0.push(1);
+	
+	for (i=1; i<tamanho; i++)
+	{	
+		r = r+speed;
+		theta = theta+new_ratio*3.1415926535/180;
+		
+		x0.push(400+r*Math.cos(theta));
+		y0.push(400+r*Math.sin(theta));
+		r0.push(2+r*10/(speed*tamanho));
+	}
+	
+	
+	svg.selectAll("circle")
+			.data(x0)
+			.enter()
+		  .append("circle")
+		  .attr("cx", function(d,i){return x0[i]})
+		  .attr("cy", function(d,i){return y0[i]})
+		  .attr("r", function(d,i){return r0[i]})
+		  .attr("stroke", "black")
+		  .attr("stroke-width", 1)
+		  .attr("fill", "goldenrod")
+
+  
+	
+	}
+	
+	
+  </script>
+</body>
+</html>
