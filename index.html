@@ -29,7 +29,7 @@ table, th, td {
 
 	</th>
 	<th id ="valor_rad">
-		3.88 radianos
+		
 	</th>
 	
   </tr>
@@ -65,7 +65,7 @@ table, th, td {
 	new_ratio =ratio + 2*(slider_angulo-50)/100; //Dois graus para cima ou para baixo
 	
 	//Muda texto no painel
-	d3.select("#valor_rad").text(new_ratio + " radianos")
+	d3.select("#valor_rad").text(new_ratio + " graus")
 
 	svg.selectAll("*").remove();
 
